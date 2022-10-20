@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yagrua-notification
+  labels:
+    name: yagrua-notification
+    app: yagrua
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: yagrua-notification
+  template:
+    metadata:
+      labels:
+        name: yagrua-notification
+        app: yagrua
+    spec:
+      containers:
+        - image: de.icr.io/yagrua-dev/yagrua-notifications
+          imagePullPolicy: IfNotPresent
+          name: yagrua-notification
+          ports:
+            - containerPort: 3008
+      restartPolicy: Always
